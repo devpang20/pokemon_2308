@@ -51,31 +51,34 @@ function PokeListPage() {
 
   return (
     <>
-      offset: {offset}
-      { offset > 0 && <button onClick={showPrev}>이전</button> }
+      <div className="m-2">
+        <div className="badge badge-success">{offset}</div>
+        { offset > 0 && <button className="btn btn-sm btn-success" onClick={showPrev}>이전</button> }
+        { totalCount > offset + limit && <button className="btn btn-sm btn-success" onClick={showNext}>이후</button> }   
+      </div>
       <hr />
-      <ul>
-        {forPrintPokemons.map((pokemon, index) =>  (
-          <li 
-            key={index} 
-            style={{
-              display: "flex", 
-              alignItems:"center", 
-              borderBottom:"1px solid black"
-            }}
-          >
-            <span>{pokemon.number}</span>
-            <img 
-              src={pokemon.imgUrl}
-              alt="포켓몬이미지" 
-            />
-            <Link to={`/pokes/${pokemon.number}`}>
-                <span>{pokemon.name}</span>
-            </Link>
-          </li>
-        ))} 
-      </ul> 
-      { totalCount > offset + limit && <button onClick={showNext}>이후</button> }      
+      <div className="con-1 w-full h-screen max-w-7xl mx-auto">
+        <h1 className="header text-2xl">포켓몬 리스트</h1>
+        <ul className="flex flex-wrap gap-4 mt-2">
+            {forPrintPokemons.map((pokemon, index) =>  (
+            <li 
+                key={index}
+                className="card card-compact w-72 bg-base-100 shadow-xl"
+            >
+                <div className="card-body">
+                    <div className="badge badge-primary badge-outline">{pokemon.number}</div>
+                    <img 
+                    src={pokemon.imgUrl}
+                    alt="포켓몬이미지" 
+                    />
+                    <Link to={`/pokes/${pokemon.number}`}>
+                        <div className="font-bold">{pokemon.name}</div>
+                    </Link>
+                </div>
+            </li>
+            ))} 
+        </ul> 
+      </div>   
     </>
   )
      

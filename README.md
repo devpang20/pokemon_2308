@@ -9,4 +9,4 @@
 - [x] 컴포넌트 최적화 작업 useCallback
 - [x] 의존모듈 설치 React-Router, immer, recoil, list 라우팅 처리
 - [x] 상세페이지 구현
-- [ ] 디자인 개선
+- [x] 디자인 개선
