@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react"
+import { NavLink, Link } from "react-router-dom";
 
 function PokeListPage() {
   const [loding, setloading] = useState(true)
@@ -68,7 +69,9 @@ function PokeListPage() {
               src={pokemon.imgUrl}
               alt="포켓몬이미지" 
             />
-            <span>{pokemon.name}</span>
+            <Link to={`/pokes/${pokemon.number}`}>
+                <span>{pokemon.name}</span>
+            </Link>
           </li>
         ))} 
       </ul> 

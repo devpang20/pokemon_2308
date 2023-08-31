@@ -8,5 +8,5 @@
 - [x] 컴포넌트 최적화 작업 useMemo
 - [x] 컴포넌트 최적화 작업 useCallback
 - [x] 의존모듈 설치 React-Router, immer, recoil, list 라우팅 처리
-- [ ] 상세페이지 구현
+- [x] 상세페이지 구현
 - [ ] 디자인 개선

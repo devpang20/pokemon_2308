@@ -1,12 +1,15 @@
 import { Route, Routes, Navigate } from "react-router-dom"
 import PokeListPage from "./components/PokeListPage"
+import PokeDetailPage from "./components/PokeDetailPage"
+import NotFoundPage from "./components/NotFoundPage"
 
 function App() {
   return (
     <Routes>
-      <Route index path="/" element={<PokeListPage />} />
-      <Route path="/poke/list" element={<PokeListPage/>} />
-      <Route path="*" element={<Navigate to="/poke/list" />} />
+      <Route index element={<PokeListPage />} />
+      <Route path="/pokes" element={<PokeListPage/>} />
+      <Route path="/pokes/:id" element={<PokeDetailPage/>} />
+      {/* <Route path="/" element={<NotFoundPage/>} /> */}
     </Routes>
   )
 }
