@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 
 function App() {
 
+  //test
+  const [count, setCount] = useState(0)
   const [loding, setloading] = useState(true)
   const [pokemons, setPokemons] = useState([])
   const [offset, setOffset] = useState(0)
@@ -21,8 +23,9 @@ function App() {
     return parseInt(urlList[urlList.length - 2])
   }
 
-
-  const forPrintPokemons = pokemons.map(pokemon => {
+  let i = 0
+  const forPrintPokemons = useMemo(() => pokemons.map(pokemon => {
+    console.log(++i)
     const number = getNumberFromUrl(pokemon.url)
     const imgUrl = `https://cdn.jsdelivr.net/gh/PokeAPI/sprites/sprites/pokemon/${number}.png`
     return {
@@ -30,7 +33,7 @@ function App() {
       imgUrl,
       ...pokemon
     }
-  })
+  }), [pokemons])
 
   //api "https://pokeapi.co/api/v2/pokemon"
   useEffect(() => {
@@ -51,6 +54,7 @@ function App() {
 
   return (
     <>
+      count: <button onClick={() => setCount(count + 1)}>{count}</button>
       offset: {offset}
       { offset > 0 && <button onClick={showPrev}>이전</button> }
       <hr />
