@@ -14,7 +14,6 @@ function App() {
   const showNext = () => {
     setOffset(offset + limit)
   }
-  
 
   // https://pokeapi.co/api/v2/pokemon/1/
   const getNumberFromUrl = (url) => {
@@ -23,8 +22,17 @@ function App() {
   }
 
 
-  //api "https://pokeapi.co/api/v2/pokemon"
+  const forPrintPokemons = pokemons.map(pokemon => {
+    const number = getNumberFromUrl(pokemon.url)
+    const imgUrl = `https://cdn.jsdelivr.net/gh/PokeAPI/sprites/sprites/pokemon/${number}.png`
+    return {
+      number,
+      imgUrl,
+      ...pokemon
+    }
+  })
 
+  //api "https://pokeapi.co/api/v2/pokemon"
   useEffect(() => {
     setloading(true)
     fetch(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`)
@@ -47,11 +55,7 @@ function App() {
       { offset > 0 && <button onClick={showPrev}>이전</button> }
       <hr />
       <ul>
-        {pokemons.map((pokemon, index) => {
-        const number = getNumberFromUrl(pokemon.url)
-        const imgUrl = `https://cdn.jsdelivr.net/gh/PokeAPI/sprites/sprites/pokemon/${number}.png`
-        
-        return (
+        {forPrintPokemons.map((pokemon, index) =>  (
           <li 
             key={index} 
             style={{
@@ -60,18 +64,16 @@ function App() {
               borderBottom:"1px solid black"
             }}
           >
-            <span>{number}</span>
+            <span>{pokemon.number}</span>
             <img 
-              src={imgUrl}
+              src={pokemon.imgUrl}
               alt="포켓몬이미지" 
             />
             <span>{pokemon.name}</span>
           </li>
-        )} 
-      )} 
+        ))} 
       </ul> 
-      { totalCount > offset + limit && <button onClick={showNext}>이후</button> }
-      
+      { totalCount > offset + limit && <button onClick={showNext}>이후</button> }      
     </>
   )
 }
