@@ -47,17 +47,28 @@ function App() {
       { offset > 0 && <button onClick={showPrev}>이전</button> }
       <hr />
       <ul>
-        {pokemons.map((pokemon, index) => (
-          <li key={index} style={{display: "flex", alignItems:"center", borderBottom:"1px solid black"}}>
-            <span>{getNumberFromUrl(pokemon.url)}</span>
-
+        {pokemons.map((pokemon, index) => {
+        const number = getNumberFromUrl(pokemon.url)
+        const imgUrl = `https://cdn.jsdelivr.net/gh/PokeAPI/sprites/sprites/pokemon/${number}.png`
+        
+        return (
+          <li 
+            key={index} 
+            style={{
+              display: "flex", 
+              alignItems:"center", 
+              borderBottom:"1px solid black"
+            }}
+          >
+            <span>{number}</span>
             <img 
-              src={`https://cdn.jsdelivr.net/gh/PokeAPI/sprites/sprites/pokemon/${getNumberFromUrl(pokemon.url)}.png`}
+              src={imgUrl}
               alt="포켓몬이미지" 
             />
             <span>{pokemon.name}</span>
           </li>
-        ))} 
+        )} 
+      )} 
       </ul> 
       { totalCount > offset + limit && <button onClick={showNext}>이후</button> }
       
