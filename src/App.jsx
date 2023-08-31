@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react"
+import { useCallback, useEffect, useMemo, useState } from "react"
 
 function App() {
 
@@ -10,12 +10,13 @@ function App() {
   const totalCount = 1281;
   const limit = 30
 
-  const showPrev = () => {
+  const showPrev = useCallback(() => {
     setOffset(offset - limit)
-  }
-  const showNext = () => {
+  }, [offset])
+
+  const showNext = useCallback(() => {
     setOffset(offset + limit)
-  }
+  }, [offset])
 
   // https://pokeapi.co/api/v2/pokemon/1/
   const getNumberFromUrl = (url) => {
